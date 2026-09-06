@@ -137,9 +137,9 @@ export default function Navbar() {
 
         <div className="hidden lg:flex items-center">
           {siteConfig.navItems.map((item) => {
-            const isActive =
-              (item.href === "#" && activeSection === "") ||
-              activeSection === item.href;
+            const isActive = item.href.startsWith("#")
+              ? location.pathname === "/" && activeSection === item.href
+              : location.pathname.startsWith(item.href);
 
             return (
               <React.Fragment key={item.href}>
@@ -179,9 +179,9 @@ export default function Navbar() {
         <div className="mt-6 space-y-12">
           <div className="flex flex-col items-center gap-3">
             {siteConfig.navMenuItems.map((item) => {
-              const isActive =
-                (item.href === "#" && activeSection === "") ||
-                activeSection === item.href;
+              const isActive = item.href.startsWith("#")
+                ? location.pathname === "/" && activeSection === item.href
+                : location.pathname.startsWith(item.href);
 
               return (
                 <NavbarMenuItem key={item.href}>
