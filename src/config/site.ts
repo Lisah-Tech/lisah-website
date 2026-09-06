@@ -15,6 +15,10 @@ export const siteConfig = {
       href: "/company-pricing",
     },
     {
+      label: "Blog",
+      href: "/blog",
+    },
+    {
       label: "FAQ",
       href: "#faq",
     },
@@ -35,6 +39,10 @@ export const siteConfig = {
     {
       label: "Pricing",
       href: "/company-pricing",
+    },
+    {
+      label: "Blog",
+      href: "/blog",
     },
     {
       label: "FAQ",

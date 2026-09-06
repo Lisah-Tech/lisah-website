@@ -12,6 +12,7 @@ import PrivacyPolicyPage from "@/pages/privacy";
 import TermsOfUsePage from "@/pages/terms";
 import CareersPage from "@/pages/careers";
 import BlogPage from "@/pages/blog";
+import BlogPostPage from "@/pages/blog/post";
 import CompanyPricingPage from "@/pages/company-pricing";
 
 function ScrollToHash() {
@@ -20,6 +21,7 @@ function ScrollToHash() {
   useEffect(() => {
     if (location.hash) {
       const element = document.getElementById(location.hash.substring(1));
+
       if (element) {
         setTimeout(() => {
           element.scrollIntoView({ behavior: "smooth" });
@@ -52,6 +54,7 @@ function App() {
           <Route element={<TermsOfUsePage />} path="/terms-of-use" />
           <Route element={<CareersPage />} path="/careers" />
           <Route element={<BlogPage />} path="/blog" />
+          <Route element={<BlogPostPage />} path="/blog/:slug" />
           <Route element={<CompanyPricingPage />} path="/company-pricing" />
         </Route>
       </Routes>
