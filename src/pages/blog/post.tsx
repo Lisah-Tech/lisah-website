@@ -75,18 +75,16 @@ export default function BlogPostPage() {
     };
   }, [slug]);
 
-  // Posts frequently have no cover set but open with an inline image; promote
-  // that image to the cover and drop it from the body so it isn't shown twice.
-  const usesLeadingImageAsCover = Boolean(post && !post.image);
+  // Use the featured image when one is set, otherwise promote the article's
+  // first inline image to the cover.
+  const cover = post?.image ?? firstImageFromHtml(post?.content ?? null);
 
   const { html, headings } = useMemo(
     () =>
       post
-        ? prepareContent(post.content, {
-            stripLeadingImage: usesLeadingImageAsCover,
-          })
+        ? prepareContent(post.content, { coverSrc: cover })
         : { html: "", headings: [] },
-    [post, usesLeadingImageAsCover],
+    [post, cover],
   );
 
   const readingTime = useMemo(() => {
@@ -98,7 +96,6 @@ export default function BlogPostPage() {
       : readingTimeFromHtml(post.content);
   }, [post]);
 
-  const cover = post?.image ?? firstImageFromHtml(post?.content ?? null);
   const publishedAt = toIsoDate(post?.publishedAt ?? post?.createdAt);
   const url =
     typeof window !== "undefined"
@@ -267,8 +264,8 @@ export default function BlogPostPage() {
                   </div>
                 </div>
 
-                {/* Wraps onto its own line on narrow screens. */}
-                <div className="ml-auto">
+                {/* Own, centred line on narrow screens; right-aligned from sm up. */}
+                <div className="flex w-full justify-center sm:ml-auto sm:w-auto sm:justify-end">
                   <ShareButtons title={post.title} url={url} />
                 </div>
               </div>
@@ -296,7 +293,7 @@ export default function BlogPostPage() {
           />
 
           <div className="mx-auto mt-12 max-w-3xl space-y-12 lg:mx-0">
-            <div className="flex flex-wrap items-center justify-between gap-4 rounded-2xl bg-primary-bg/50 px-5 py-5">
+            <div className="flex flex-col items-center gap-4 rounded-2xl bg-primary-bg/50 px-5 py-5 sm:flex-row sm:justify-between">
               <p className="text-sm font-medium text-gray-700">
                 Found this useful? Share it.
               </p>

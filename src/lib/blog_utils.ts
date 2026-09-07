@@ -82,10 +82,19 @@ function slugify(text: string, taken: Set<string>): string {
 
 export interface PrepareOptions {
   /**
-   * Set when the article's first inline image is being promoted to the cover,
-   * so the same image isn't rendered twice.
+   * URL of the cover image shown above the article. If the post opens with that
+   * same image inline, it is dropped from the body so it isn't rendered twice.
+   * A different opening image is left alone.
    */
-  stripLeadingImage?: boolean;
+  coverSrc?: string | null;
+}
+
+/** Compares image URLs ignoring any query string or fragment. */
+function sameImage(a: string | null, b: string | null): boolean {
+  if (!a || !b) return false;
+  const normalize = (value: string) => value.trim().split(/[?#]/)[0];
+
+  return normalize(a) === normalize(b);
 }
 
 /**
@@ -95,7 +104,7 @@ export interface PrepareOptions {
  */
 export function prepareContent(
   html: string,
-  { stripLeadingImage = false }: PrepareOptions = {},
+  { coverSrc = null }: PrepareOptions = {},
 ): PreparedContent {
   if (typeof window === "undefined") return { html, headings: [] };
 
@@ -111,11 +120,12 @@ export function prepareContent(
     }
   });
 
-  if (stripLeadingImage) {
+  if (coverSrc) {
     const firstImage = doc.body.querySelector("img");
 
-    // Only strip it if nothing but empty paragraphs precede it.
-    if (firstImage) {
+    // Only strip it if it *is* the cover and nothing but empty paragraphs
+    // precede it — an opening image that differs from the cover is content.
+    if (firstImage && sameImage(firstImage.getAttribute("src"), coverSrc)) {
       const before = htmlToText(
         Array.from(doc.body.children)
           .slice(
