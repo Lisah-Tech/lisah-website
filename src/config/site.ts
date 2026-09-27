@@ -11,10 +11,6 @@ export const siteConfig = {
       href: "#features",
     },
     {
-      label: "Pricing",
-      href: "/company-pricing",
-    },
-    {
       label: "Blog",
       href: "/blog",
     },
@@ -37,10 +33,6 @@ export const siteConfig = {
       href: "#features",
     },
     {
-      label: "Pricing",
-      href: "/company-pricing",
-    },
-    {
       label: "Blog",
       href: "/blog",
     },
@@ -58,5 +50,7 @@ export const siteConfig = {
     facebook: "https://facebook.com/uselisah",
     instagram: "https://instagram.com/use_lisah",
     twitter: "https://x.com/uselisah",
+    // TODO: confirm the channel handle.
+    youtube: "https://youtube.com/@uselisah",
   },
 };

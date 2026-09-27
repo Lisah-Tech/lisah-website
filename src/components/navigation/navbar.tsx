@@ -11,12 +11,13 @@ import {
 } from "@heroui/navbar";
 import { Divider, Image } from "@heroui/react";
 import { FaFacebookSquare } from "react-icons/fa";
-import { FaLinkedinIn, FaInstagram, FaXTwitter } from "react-icons/fa6";
+import { FaLinkedinIn, FaInstagram, FaXTwitter, FaYoutube } from "react-icons/fa6";
 
 import { siteConfig } from "@/config/site";
 import Logo from "@/assets/images/logo.png";
 import GooglePlayLogo from "@/assets/images/google_play.png";
-import AppStoreLogo from "@/assets/images/app_store.png";
+// App Store badge is hidden until the iOS app is live.
+// import AppStoreLogo from "@/assets/images/app_store.png";
 
 export default function Navbar() {
   const location = useLocation();
@@ -188,12 +189,12 @@ export default function Navbar() {
               radius="none"
               src={GooglePlayLogo}
             />
-            <Image
+            {/* <Image
               alt="App Store"
               className="h-14 w-44"
               radius="none"
               src={AppStoreLogo}
-            />
+            /> */}
           </div>
 
           <div className="flex justify-center gap-3 pt-2">
@@ -232,6 +233,15 @@ export default function Navbar() {
               aria-label="X (Twitter)"
             >
               <FaXTwitter className="text-green-900" />
+            </a>
+            <a
+              href={siteConfig.socialLinks.youtube}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="p-2.5 bg-green-200 rounded-full cursor-pointer hover:bg-green-300 transition-colors"
+              aria-label="YouTube"
+            >
+              <FaYoutube className="text-green-900" />
             </a>
           </div>
         </div>

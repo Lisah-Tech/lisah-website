@@ -18,6 +18,7 @@ export default {
         primary: "#49E68A",
         secondary: "#A29529",
         "primary-bg": "#F7FCEB",
+        mint: "#8FFFB4",
         "lisah-green": "#109D3F",
         "dark-blue": "#010D50",
         "light-green": "#26FF72A6",

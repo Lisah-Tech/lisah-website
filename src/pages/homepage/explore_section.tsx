@@ -1,39 +1,35 @@
-import { Image } from "@heroui/react";
-
-import PhoneMockup from "@/assets/images/hero_phone_mockup.png";
+import PhoneMockup from "@/assets/images/phones_mockup.png";
 import GooglePlayLogo from "@/assets/images/google_play.png";
-import AppStoreLogo from "@/assets/images/app_store.png";
+// App Store badge is hidden until the iOS app is live.
+// import AppStoreLogo from "@/assets/images/app_store.png";
 
 export default function ExploreSection() {
   return (
-    <div className="bg-primary relative flex px-6 py-14 lg:px-12 xl:px-32 lg:py-36 text-black">
-      <div className="space-y-6 lg:max-w-[30.813rem] xl:max-w-lg pb-70 md:pb-0 flex flex-col items-center lg:items-start">
-        <h3 className="text-3xl lg:text-4xl font-bold text-center lg:text-left">
-          Explore endless possibilities with Lisah
-        </h3>
-        <div className="flex items-center justify-center lg:justify-start gap-4">
-          <Image
-            alt="Google Play"
-            className="h-10"
-            radius="none"
-            src={GooglePlayLogo}
-          />
-          <Image
-            alt="App Store"
-            className="h-10"
-            radius="none"
-            src={AppStoreLogo}
+    <section className="bg-mint overflow-hidden">
+      <div className="mx-auto grid max-w-7xl items-center gap-10 px-6 pt-14 lg:grid-cols-2 lg:gap-12 lg:px-12 lg:py-20">
+        <div className="flex flex-col items-center gap-6 text-center lg:items-start lg:text-left">
+          <h2 className="text-3xl lg:text-[2.75rem] font-bold uppercase leading-tight tracking-tight text-dark-blue">
+            Explore endless possibilities with Lisah
+          </h2>
+          <p className="max-w-lg text-base lg:text-lg leading-relaxed text-gray-900">
+            Set-up <strong>smart custom portfolios</strong>, allowing you to
+            auto invest and rebalance your favourite assets. Follow and copy
+            curated or thematic portfolios, or create your own.
+          </p>
+          <div className="flex items-center gap-4">
+            <img alt="Google Play" className="h-12" src={GooglePlayLogo} />
+            {/* <img alt="App Store" className="h-12" src={AppStoreLogo} /> */}
+          </div>
+        </div>
+
+        <div className="flex justify-center lg:justify-end">
+          <img
+            alt="Lisah app screens"
+            className="w-full max-w-sm md:max-w-md lg:max-w-[34rem] drop-shadow-2xl"
+            src={PhoneMockup}
           />
         </div>
       </div>
-
-      <div className="absolute right-10 lg:right-0 xl:right-24 bottom-0">
-        <Image
-          alt="grouped phone mockup"
-          className="w-80 lg:w-[31rem] xl:w-[34rem]"
-          src={PhoneMockup}
-        />
-      </div>
-    </div>
+    </section>
   );
 }
