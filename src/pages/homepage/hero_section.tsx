@@ -5,7 +5,8 @@ import { TypeAnimation } from "react-type-animation";
 import { AnimatePresence, motion } from "framer-motion";
 
 import GooglePlayLogo from "@/assets/images/google_play.png";
-import AppStoreLogo from "@/assets/images/app_store.png";
+// App Store badge is hidden until the iOS app is live.
+// import AppStoreLogo from "@/assets/images/app_store.png";
 import PhoneMockup from "@/assets/images/hero_phone_mockup.png";
 import AssetsLogos from "@/assets/images/asset_logos.png";
 
@@ -142,14 +143,14 @@ export default function HeroSection() {
                   radius="none"
                   src={GooglePlayLogo}
                 />
-                <Image
+                {/* <Image
                   alt="App Store"
                   className="h-10"
                   radius="none"
                   src={AppStoreLogo}
-                />
+                /> */}
               </div>
-              <div className="flex justify-end lg:justify-start">
+              <div className="flex justify-center lg:justify-start">
                 <p className="text-sm text-red-500">*Coming soon...</p>
               </div>
 
