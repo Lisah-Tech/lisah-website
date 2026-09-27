@@ -1,12 +1,12 @@
 import { useEffect, useRef } from "react";
 import { Link } from "react-router-dom";
 import { Image } from "@heroui/react";
-import { FaLinkedinIn, FaXTwitter } from "react-icons/fa6";
+import { FaLinkedinIn, FaXTwitter, FaYoutube } from "react-icons/fa6";
 import { FaFacebookSquare, FaInstagram } from "react-icons/fa";
 
 import { siteConfig } from "@/config/site";
 import LogoGreen from "@/assets/images/Lisah_logo_green.png";
-import LisahBgLogo from "@/assets/images/Lisah_logo_green_1.png";
+import LisahBgLogo from "@/assets/images/Lisah_logo_green_3.png";
 
 const currentYear = new Date().getFullYear();
 
@@ -43,15 +43,15 @@ export default function Footer() {
   }, []);
 
   return (
-    <footer className="relative w-full pt-16 xl:pt-24 pb-10 overflow-hidden">
-      {/* Background Watermark Logo */}
-      <div className="absolute bottom-0 left-0 right-0 -z-10 flex items-end justify-center opacity-10 pointer-events-none">
-        <img
-          alt="bg logo"
-          className="object-contain max-w-full h-auto"
-          src={LisahBgLogo}
-        />
-      </div>
+    <footer className="relative isolate w-full pt-16 xl:pt-24 pb-10 overflow-hidden">
+      {/* Background watermark, faded at the edges like the one behind
+          "Build your asset portfolio" on the homepage. */}
+      <img
+        alt=""
+        aria-hidden="true"
+        className="pointer-events-none absolute -z-10 bottom-0 left-1/2 w-[36rem] lg:w-[56rem] max-w-none -translate-x-1/2 translate-y-[15%] select-none [mask-image:linear-gradient(to_bottom,transparent,#000_30%,#000_75%,transparent)]"
+        src={LisahBgLogo}
+      />
 
       {/* Top Section */}
       <div className="relative max-w-7xl mx-auto px-4 lg:px-12 flex justify-between gap-10">
@@ -65,14 +65,6 @@ export default function Footer() {
                 className="cursor-pointer hover:underline"
               >
                 Careers
-              </Link>
-            </li>
-            <li>
-              <Link
-                to="/company-pricing"
-                className="cursor-pointer hover:underline"
-              >
-                Pricing
               </Link>
             </li>
             <li>
@@ -158,6 +150,15 @@ export default function Footer() {
             >
               <FaXTwitter className="text-green-900" />
             </a>
+            <a
+              href={siteConfig.socialLinks.youtube}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="p-1.5 bg-green-200 rounded-full cursor-pointer hover:bg-green-300 transition-colors"
+              aria-label="YouTube"
+            >
+              <FaYoutube className="text-green-900" />
+            </a>
           </div>
         </div>
       </div>
@@ -175,9 +176,9 @@ export default function Footer() {
 
         <div className="space-y-1">
           <p className="text-center text-lg lg:text-xl leading-relaxed text-black/80 max-w-2xl">
-            Lisah works directly with regulated, licensed financial partners
-            to execute every trade, maintaining strict security and compliance
-            standards.
+            Lisah Technologies Ltd works directly with regulated, licensed
+            financial partners to execute every trade, maintaining strict
+            security and compliance standards.
           </p>
 
           {/* Disclaimer */}
@@ -190,7 +191,7 @@ export default function Footer() {
 
       {/* Bottom Copy */}
       <p className="relative text-center mt-10 text-sm text-black/80">
-        © {currentYear} Lisah, Inc. All Rights Reserved.
+        © {currentYear} Lisah Technologies Ltd. All Rights Reserved.
       </p>
     </footer>
   );

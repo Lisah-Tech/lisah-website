@@ -34,15 +34,15 @@ export default function BrandsSection() {
       <div className="brand-wall mx-auto max-w-7xl">
         <ul className="brand-track">
           {TRACK.map((brand, index) => {
-            // Mobile shows the list once as a swipeable row; the repeats only
-            // exist to feed the desktop marquee.
+            // Only the first copy is announced; the repeats just feed the
+            // mobile loop and are hidden on the static desktop row.
             const isRepeat = index >= BRANDS.length;
 
             return (
               <li
                 key={`${brand.name}-${index}`}
                 aria-hidden={isRepeat || undefined}
-                className={isRepeat ? "hidden md:flex" : "flex"}
+                className={isRepeat ? "flex md:hidden" : "flex"}
               >
                 <img
                   alt={isRepeat ? "" : brand.name}

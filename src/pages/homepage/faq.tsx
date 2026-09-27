@@ -3,71 +3,51 @@ import { Accordion, AccordionItem } from "@heroui/react";
 const faqItems = [
   {
     id: 1,
-    question:
-      "What is Lisah and how is it different from a standard brokerage app?",
+    question: "What is Lisah?",
     answer:
-      "Lisah is a secure vault for long-term assets. Through SEC-regulated partners, we provide access to stocks, indices, and cryptocurrencies with a portfolio lock to prevent impulse selling during market downturns. Our platform also features auto-liquidation at your target prices and secure beneficiary transfers.",
+      "Lisah is an all-in-one financial platform that helps you build wealth through global investments, smart savings, and international money transfers.",
   },
   {
     id: 2,
-    question: "What assets can I lock up with Lisah?",
+    question: "Is my money safe?",
     answer:
-      "Lisah supports a selection of major stocks and cryptocurrencies available through our network of regulated financial partners. View list of assets here.",
+      "Yes. Lisah works with recognized and regulated custody partners to ensure your funds and assets are fully secure.",
   },
   {
     id: 3,
-    question: "What are the minimum and maximum lock-up periods?",
+    question: "How do I fund my account and withdraw funds?",
     answer:
-      "You can set a lock-up period for a minimum of 6 months up to a current maximum of 4 years. This may be extended in the future. We encourage choosing a period that aligns with your long-term financial goals.",
+      "You can deposit your local currency completely free of charge. Lisah makes on-ramping and off-ramping seamless with some of the lowest commissions in the industry.",
   },
   {
     id: 4,
-    question: "Where are my assets held, and are they safe?",
+    question: "Can I save and invest at the same time?",
     answer:
-      "Your assets are held in custody by our regulated and licensed broker and exchange partners. This ensures that your investments benefit from the security and oversight of established financial institutions and regulations.",
+      "Yes! Lisah offers asset-backed fixed savings where your traditional savings are tied to diversified asset classes like stocks, ETFs, crypto, commodities, gold, and silver.",
   },
   {
-    id: 8,
-    question: "Can I access my funds before the scheduled release date?",
+    id: 5,
+    question: "How does earning yield work?",
     answer:
-      "No. The purpose of Lisah is to enforce commitment. Once an asset is time-locked, neither the user nor Lisah can initiate an early sale or withdrawal. Only lock up capital you won’t need until the chosen release date.",
+      "You earn passive yield on select assets just by holding them in your portfolio. Plus, you still enjoy standard dividends and all the benefits of asset growth.",
   },
   {
-    id: 9,
-    question: "What is Auto-Liquidation?",
+    id: 6,
+    question: "How much do I need to start investing?",
     answer:
-      "Auto-Liquidation is an optional feature you can toggle on when setting your lock-up date. If ON, your assets will automatically be sold at the current market price on the release date, and the cash proceeds sent to your linked bank account. If OFF, the assets simply unlock, and you regain manual trading control on that date.",
+      "You can start investing with as little as 2,000 NGN. Lisah removes traditional barriers by eliminating high minimum fees, making it the ideal choice for Dollar Cost Averaging (DCA).",
   },
   {
-    id: 10,
-    question:
-      "How long does it take to receive my funds after the release date?",
+    id: 7,
+    question: "What are Smart Portfolios?",
     answer:
-      "If Auto-Liquidation is ON, assets are sold immediately on the release date. Cash settlement and bank transfer follow the standard timelines of the broker and your bank.",
-  },
-  {
-    id: 11,
-    question: "Will I be notified when my lock-up period is ending?",
-    answer:
-      "Yes. Lisah sends reminders via email and/or in-app notifications well before your scheduled release date so you can confirm whether Auto-Liquidation should proceed or if you prefer manual control.",
-  },
-  {
-    id: 12,
-    question: "Can I see my portfolio performance during the lock-up period?",
-    answer:
-      "Yes. You can log in at any time to view your portfolio value, track performance, and see the countdown to your release date.",
-  },
-  {
-    id: 13,
-    question: "Can I add more funds to a locked position?",
-    answer:
-      "Yes, you can. Lisah supports topping up existing locked positions at any time to encourage long-term commitment and dollar-cost averaging.",
+      "Smart Portfolios allow you to set up custom rules to auto-invest and automatically rebalance your favorite assets. You can also follow curated industry or thematic portfolios, or build your own from scratch.",
   },
 ];
 
 export default function FAQ() {
   return (
-    <div id="faq" className="mx-auto max-w-7xl px-4 lg:px-12 space-y-12">
+    <div className="mx-auto max-w-7xl px-4 lg:px-12 space-y-12" id="faq">
       <h2 className="text-3xl lg:text-5xl font-normal text-lisah-green text-center">
         Frequently Asked Questions <br />
         (FAQ)
