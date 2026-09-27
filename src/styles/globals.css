@@ -26,6 +26,80 @@ body {
 }
 
 /* ---------------------------------------------------------------------------
+   "Brands we work with" logo wall.
+   Mobile: a plain swipeable row that bleeds off the right edge.
+   Desktop: an infinite linear marquee with faded edges.
+--------------------------------------------------------------------------- */
+
+.brand-wall {
+  overflow-x: auto;
+  padding-inline: 1rem;
+  scroll-padding-inline: 1rem;
+  scroll-snap-type: x proximity;
+  scrollbar-width: none;
+  -webkit-overflow-scrolling: touch;
+}
+
+.brand-wall::-webkit-scrollbar {
+  display: none;
+}
+
+.brand-track {
+  display: flex;
+  align-items: center;
+  width: max-content;
+}
+
+/* Spacing lives on each item (not `gap`) so both halves of the marquee track
+   are exactly the same width. */
+.brand-track > li {
+  flex-shrink: 0;
+  padding-right: 2.5rem;
+  scroll-snap-align: start;
+}
+
+@keyframes brand-marquee {
+  to {
+    transform: translateX(-50%);
+  }
+}
+
+@media (min-width: 768px) {
+  .brand-wall {
+    overflow: hidden;
+    padding-inline: 0;
+    -webkit-mask-image: linear-gradient(
+      to right,
+      transparent,
+      #000 12%,
+      #000 88%,
+      transparent
+    );
+    mask-image: linear-gradient(
+      to right,
+      transparent,
+      #000 12%,
+      #000 88%,
+      transparent
+    );
+  }
+
+  .brand-track {
+    animation: brand-marquee 40s linear infinite;
+  }
+
+  .brand-track > li {
+    padding-right: 4.5rem;
+  }
+}
+
+@media (min-width: 768px) and (prefers-reduced-motion: reduce) {
+  .brand-track {
+    animation: none;
+  }
+}
+
+/* ---------------------------------------------------------------------------
    Blog article typography — applied to CMS-authored HTML from Wisp.
    Kept as plain CSS (rather than a Tailwind plugin) so it can style markup
    the app never renders itself.

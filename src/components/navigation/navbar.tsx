@@ -1,6 +1,5 @@
 import React, { useEffect, useRef, useState } from "react";
 import { useLocation, Link as RouterLink, useNavigate } from "react-router-dom";
-import { Button } from "@heroui/button";
 import {
   Navbar as HeroUINavbar,
   NavbarBrand,
@@ -25,11 +24,6 @@ export default function Navbar() {
   const [activeSection, setActiveSection] = useState("#");
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const observerRef = useRef<IntersectionObserver | null>(null);
-
-  // Hide "GET EARLY ACCESS" button on early access pages
-  const shouldHideEarlyAccessButton =
-    location.pathname === "/early-access" ||
-    location.pathname === "/early-access/success";
 
   useEffect(() => {
     const handleScroll = () => {
@@ -161,17 +155,6 @@ export default function Navbar() {
       </NavbarContent>
 
       <NavbarContent justify="end">
-        {!shouldHideEarlyAccessButton && (
-          <Button
-            as={RouterLink}
-            className="bg-primary text-black font-semibold px-8 py-7 shadow-md hidden lg:flex"
-            radius="full"
-            size="sm"
-            to="/early-access"
-          >
-            GET EARLY ACCESS
-          </Button>
-        )}
         <NavbarMenuToggle className="sm:hidden basis-1" />
       </NavbarContent>
 
