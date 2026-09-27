@@ -1,15 +1,87 @@
-import React from "react";
-import { Link } from "react-router-dom";
-import { Avatar, AvatarGroup, Button, Image } from "@heroui/react";
-import { MdStarPurple500 } from "react-icons/md";
+import React, { RefObject, useEffect, useRef, useState } from "react";
+import { Avatar, AvatarGroup, Image } from "@heroui/react";
+import { MdStarPurple500, MdVerifiedUser } from "react-icons/md";
 import { TypeAnimation } from "react-type-animation";
+import { AnimatePresence, motion } from "framer-motion";
 
 import GooglePlayLogo from "@/assets/images/google_play.png";
 import AppStoreLogo from "@/assets/images/app_store.png";
 import PhoneMockup from "@/assets/images/hero_phone_mockup.png";
 import AssetsLogos from "@/assets/images/asset_logos.png";
 
+const HERO_WORDS = ["Trade", "Invest", "Earn", "Save"];
+const WORD_HOLD_MS = 1400;
+// Share of the heading that must be visible before a run starts.
+const START_RATIO = 0.6;
+
+/**
+ * Steps through `count` words once each time `ref` scrolls into view and
+ * stops on the last one. Leaving the viewport entirely resets the sequence,
+ * so scrolling away and back replays it from the first word.
+ */
+function useWordCycleOnView(ref: RefObject<Element>, count: number) {
+  const [index, setIndex] = useState(0);
+
+  useEffect(() => {
+    const node = ref.current;
+
+    if (!node) return;
+
+    const reduceMotion = window.matchMedia(
+      "(prefers-reduced-motion: reduce)",
+    ).matches;
+    let timer: number | undefined;
+    let hasRun = false;
+
+    const stop = () => window.clearInterval(timer);
+
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        if (!entry.isIntersecting) {
+          stop();
+          hasRun = false;
+          setIndex(0);
+
+          return;
+        }
+
+        if (hasRun || entry.intersectionRatio < START_RATIO) return;
+        hasRun = true;
+
+        if (reduceMotion) {
+          setIndex(count - 1);
+
+          return;
+        }
+
+        let current = 0;
+
+        setIndex(current);
+        timer = window.setInterval(() => {
+          current += 1;
+          setIndex(current);
+          if (current >= count - 1) stop();
+        }, WORD_HOLD_MS);
+      },
+      { threshold: [0, START_RATIO] },
+    );
+
+    observer.observe(node);
+
+    return () => {
+      stop();
+      observer.disconnect();
+    };
+  }, [ref, count]);
+
+  return index;
+}
+
 export default function HeroSection() {
+  const headingRef = useRef<HTMLHeadingElement>(null);
+  const wordIndex = useWordCycleOnView(headingRef, HERO_WORDS.length);
+  const word = HERO_WORDS[wordIndex];
+
   return (
     <React.Fragment>
       <div className="absolute w-[19rem] lg:w-[48.819rem] h-[19rem] lg:h-[32.131rem] shrink-0 rounded-full bg-light-lisah-green blur-[100px] top-[20rem] lg:top-[10rem] lg:right-[2rem]" />
@@ -17,28 +89,48 @@ export default function HeroSection() {
         <div className="mx-auto max-w-7xl px-4 lg:px-12 py-16 lg:py-0 grid lg:grid-cols-2 gap-12 items-center justify-center">
           <div className="space-y-10 lg:space-y-16 lg:pt-20">
             <div className="space-y-12 lg:space-y-10">
-              <div className="space-y-2 text-center lg:text-left">
-                <h1 className="text-3xl md:text-5xl font-bold leading-tight text-gray-900">
-                  Your Long-Term Asset Vault.
+              <div className="space-y-5 text-center lg:text-left">
+                <h1
+                  ref={headingRef}
+                  className="text-[2.75rem] sm:text-6xl lg:text-[4rem] font-bold leading-[1.05] tracking-tight text-gray-900"
+                >
+                  <span className="sr-only">
+                    Trade, Invest, Earn and Save Without Borders
+                  </span>
+                  <span aria-hidden="true" className="block">
+                    <span className="relative inline-block text-lisah-green">
+                      <AnimatePresence initial={false} mode="popLayout">
+                        <motion.span
+                          key={word}
+                          animate={{ opacity: 1, y: 0, filter: "blur(0px)" }}
+                          className="inline-block"
+                          exit={{
+                            opacity: 0,
+                            y: "-0.4em",
+                            filter: "blur(6px)",
+                          }}
+                          initial={{
+                            opacity: 0,
+                            y: "0.4em",
+                            filter: "blur(6px)",
+                          }}
+                          transition={{
+                            duration: 0.45,
+                            ease: [0.22, 1, 0.36, 1],
+                          }}
+                        >
+                          {word}
+                        </motion.span>
+                      </AnimatePresence>
+                    </span>
+                    <span className="block">Without Borders</span>
+                  </span>
                 </h1>
 
-                <p className="text-md lg:text-base max-w-lg mx-auto lg:mx-0">
-                  Invest toward defined future goals. Lock your portfolio until
-                  your target date, ensuring your assets mature without
-                  interference from market noise or short-term needs.
+                <p className="text-base lg:text-lg text-gray-600 max-w-md mx-auto lg:mx-0">
+                  Trade, Save and Invest in US stocks, ETFs, and crypto 24/7, at
+                  the lowest fees.
                 </p>
-              </div>
-
-              <div className="flex items-center justify-center lg:justify-start gap-4">
-                <Button
-                  as={Link}
-                  className="bg-primary text-black font-semibold px-8 py-5 lg:py-7 shadow-md"
-                  radius="full"
-                  size="sm"
-                  to="/early-access"
-                >
-                  GET EARLY ACCESS
-                </Button>
               </div>
             </div>
 
@@ -58,8 +150,8 @@ export default function HeroSection() {
                 />
               </div>
               <div className="flex justify-end lg:justify-start">
-                <p className="text-red-500">Coming soon...</p>
-          </div>
+                <p className="text-sm text-red-500">*Coming soon...</p>
+              </div>
 
               {/* Avatar group with stars - moved here for desktop */}
               <div className="flex items-center gap-2 lg:justify-start justify-center mt-4">
@@ -107,6 +199,12 @@ export default function HeroSection() {
                 </div>
               </div>
             </div>
+
+            <p className="flex items-start gap-2 w-fit max-w-sm mx-auto lg:mx-0 rounded-2xl border border-lisah-green/15 bg-white/70 px-4 py-3 text-sm text-gray-600 backdrop-blur-sm">
+              <MdVerifiedUser className="shrink-0 mt-0.5 text-base text-lisah-green" />
+              Crypto assets safely held by our SEC provisionally regulated
+              custody partner.
+            </p>
           </div>
 
           <div className="relative flex justify-center lg:justify-end">
