@@ -14,6 +14,7 @@ import CareersPage from "@/pages/careers";
 import BlogPage from "@/pages/blog";
 import BlogPostPage from "@/pages/blog/post";
 import CompanyPricingPage from "@/pages/company-pricing";
+import DeleteAccountPage from "@/pages/delete-account";
 
 function ScrollToHash() {
   const location = useLocation();
@@ -56,6 +57,7 @@ function App() {
           <Route element={<BlogPage />} path="/blog" />
           <Route element={<BlogPostPage />} path="/blog/:slug" />
           <Route element={<CompanyPricingPage />} path="/company-pricing" />
+          <Route element={<DeleteAccountPage />} path="/delete-account" />
         </Route>
       </Routes>
     </>
